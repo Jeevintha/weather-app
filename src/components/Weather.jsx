@@ -10,7 +10,7 @@ import wind_icon from '../assets/wind.png'
 import humidity_icon from '../assets/humidity.png'
 
 const Weather = () => {
-
+    const API_KEY = '4e95952011f1a60fbb959dfb961547b6'
     const inputRef = useRef()
     const [weatherData, setWeatherData] = useState(false);
 
@@ -37,7 +37,7 @@ const Weather = () => {
           return;
       }
       try {
-          const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=4e95952011f1a60fbb959dfb961547b6`;
+          const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
 
           const response = await fetch(url);
           const data = await response.json();
@@ -46,8 +46,6 @@ const Weather = () => {
             alert(data.message);
             return;
           }
-
-          console.log(data);
           const icon = allIcons[data.weather[0].icon] || clear_icon;
           setWeatherData({
             humidity: data.main.humidity,
